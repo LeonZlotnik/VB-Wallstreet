@@ -1,0 +1,43 @@
+Sub Multiyear_stock_Homework_Easy()
+
+For Each ws In Worksheets
+
+Dim Ticker_Total As Double
+Ticker_Total = 0
+
+Dim Ticker_Summary_Row As Integer
+Ticker_Summary_Row = 2
+
+  ws.Cells(1, 9).Value = "Ticker"
+  ws.Cells(1, 10).Value = "Total Stock Volume"
+
+  Lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+
+  For i = 2 To Lastrow
+
+  If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+
+
+   Ticker_Name = ws.Cells(i, 1).Value
+
+   Ticker_Total = Ticker_Total + ws.Cells(i, 7).Value
+
+   ws.Range("I" & Ticker_Summary_Row).Value = Ticker_Name
+
+   ws.Range("J" & Ticker_Summary_Row).Value = Ticker_Total
+
+   Ticker_Summary_Row = Ticker_Summary_Row + 1
+
+   Ticker_Total = 0
+
+ Else
+
+   Ticker_Total = Ticker_Total + ws.Cells(i, 7).Value
+
+ End If
+
+ Next i
+
+ Next ws
+
+End Sub
